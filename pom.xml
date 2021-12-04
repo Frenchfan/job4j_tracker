@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
     <version>2.0</version>
     <name>tracker</name>
-    <url>http://job4j.ru/</url>
+    <url>https://job4j.ru/</url>
 
     <properties>
         <maven.compiler.source>14</maven.compiler.source>

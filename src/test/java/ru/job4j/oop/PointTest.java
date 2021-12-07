@@ -41,6 +41,15 @@ public class PointTest {
     }
 
     @Test
+    public void when01to10then1dot41() {
+        double expected = 1.41;
+        Point a = new Point(0, 1);
+        Point b = new Point(1, 0);
+        double dist = a.distance(b);
+        Assert.assertEquals(expected, dist, 0.01);
+    }
+
+    @Test
     public void when000to100then1() {
         double expected = 1;
         Point a = new Point(0, 0, 0);

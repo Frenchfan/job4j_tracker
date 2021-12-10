@@ -11,7 +11,21 @@ public class Matches {
         while (count > 0) {
             String player = turn ? "Первый игрок" : "Второй игрок";
             System.out.println(player + " введите число от 1 до 3:");
-            int matches = Integer.parseInt(input.nextLine());
+            boolean wrongInput = true;
+            int matches = 0;
+            while (wrongInput) {
+                try {
+                    matches = Integer.parseInt(input.nextLine());
+                } catch (NumberFormatException ignored) {
+                }
+                if ((matches == 1 || matches == 2 || matches == 3) && (count - matches >= 0)) {
+                    wrongInput = false;
+                } else if (count - matches < 0) {
+                    System.out.println("Осталось только " + count + " спичек. Введите другое число");
+                } else {
+                    System.out.println("Можно ввести только числа от 1 до 3");
+                }
+            }
             turn = !turn;
             /* Остальная логика игры. */
             count -= matches;

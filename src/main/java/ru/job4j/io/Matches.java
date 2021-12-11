@@ -14,10 +14,7 @@ public class Matches {
             boolean wrongInput = true;
             int matches = 0;
             while (wrongInput) {
-                try {
-                    matches = Integer.parseInt(input.nextLine());
-                } catch (NumberFormatException ignored) {
-                }
+                matches = Integer.parseInt(input.nextLine());
                 if ((matches == 1 || matches == 2 || matches == 3) && (count - matches >= 0)) {
                     wrongInput = false;
                 } else if (count - matches < 0) {

@@ -3,9 +3,11 @@ package ru.job4j;
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 
-import java.util.Arrays;
-
 public class SingleTracker {
+
+    private SingleTracker() {
+    }
+
     private Tracker tracker = new Tracker();
 
     private static SingleTracker instance = null;

@@ -5,13 +5,33 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Класс описывает модель банковского сервиса
+ * @author PETR SUMKIN
+ * @version 1.0
+ */
 public class BankService {
+    /**
+     * Все пользователи с привязанными к ним счетами
+     * хранятся в map типа {@link User} и {@link Account}
+     */
     private final Map<User, List<Account>> users = new HashMap<>();
 
+    /**
+     * Метод позволяет добавить пользователя
+     * @param user пользователь, т.е. объект класса {@link User}
+     */
     public void addUser(User user) {
         users.putIfAbsent(user, new ArrayList<>());
     }
 
+    /**
+     * Метод позволяет добавить новый счет пользователю,
+     * первоначально пользователя нужно найти по паспорту.
+     * Для этого нужно использовать метод findByPassport.
+     * @param passport номер паспорта пользователя
+     * @param account номер счета пользователя
+     */
     public void addAccount(String passport, Account account) {
         User user = findByPassport(passport);
         if (user != null) {
@@ -22,6 +42,11 @@ public class BankService {
         }
     }
 
+    /**
+     * Метод позволяет найти пользователя по паспорту
+     * @param passport номер паспорта пользователя
+     * @return возвращает пользователя, т.е. объект класса {@link User}
+     */
     public User findByPassport(String passport) {
         for (User user: users.keySet()) {
             if (user.getPassport().equals(passport)) {
@@ -31,6 +56,12 @@ public class BankService {
         return null;
     }
 
+    /**
+     * Метод позволяет найти счет пользователя по реквизитам
+     * @param passport номер паспорта
+     * @param requisite реквизиты
+     * @return возвращает счет пользователя
+     */
     public Account findByRequisite(String passport, String requisite) {
         User user = findByPassport(passport);
         if (user != null) {
@@ -43,6 +74,15 @@ public class BankService {
         return null;
     }
 
+    /**
+     * Метод позволяет перечислять деньги с одного счета на другой
+     * @param srcPassport номер паспорта отправителя
+     * @param srcRequisite реквизиты счета отправителя
+     * @param destPassport номер паспорта получателя
+     * @param destRequisite реквизиты счета получателя
+     * @param amount сумма перевода
+     * @return возвращает true, если перевод удался
+     */
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String destRequisite, double amount) {
         boolean rsl = false;

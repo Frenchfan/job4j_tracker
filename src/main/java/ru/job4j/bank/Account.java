@@ -17,8 +17,8 @@ public class Account {
     /**
      * Конструктор класса, принимает на вход реквизиты
      * и первоначальный баланс счета
-     * @param requisite
-     * @param balance
+     * @param requisite реквизиты
+     * @param balance баланс
      */
     public Account(String requisite, double balance) {
         this.requisite = requisite;

@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class ListToMap {
     /**
      * Метод преобразует лист в мапу, где фамилия - ключ, а student - значение
-     * @param list
+     * @param list список студентов
      * @return
      */
     public static Map<String, Student> convert(List<Student> list) {

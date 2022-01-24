@@ -13,7 +13,6 @@ public class ListToMap {
      */
     public static Map<String, Student> convert(List<Student> list) {
         return list.stream()
-                .distinct()
                 .collect(Collectors.toMap(
                         Student::getSurname, x -> x,
                         (x, x2) -> x));

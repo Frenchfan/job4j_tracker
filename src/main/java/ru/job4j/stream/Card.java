@@ -13,6 +13,10 @@ public class Card {
         this.value = value;
     }
 
+    /**
+     * Generate a deck of cards via Stream API
+     * @param args
+     */
     public static void main(String[] args) {
         List<Card> deck = Stream.of(Suit.values())
                 .flatMap(suit -> Stream.of(Value.values())

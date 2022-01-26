@@ -40,6 +40,11 @@ public class AveragingMethod {
         }
     }
 
+    /**
+     * Finidng the average age of the worker per company
+     * @param workers
+     * @return
+     */
     public static Map<String, Double> averaging(List<Worker> workers) {
         return workers.stream()
                 .collect(Collectors.groupingBy(

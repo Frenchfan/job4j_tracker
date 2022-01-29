@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ *
+ */
 public class Analyze {
 
     public static double averageScore(Stream<Pupil> stream) {
@@ -57,7 +60,6 @@ public class Analyze {
                         .stream())
                 .collect(Collectors
                         .groupingBy(Subject::getName,
-                                LinkedHashMap::new,
                                 Collectors.summingDouble(Subject::getScore)))
                 .entrySet()
                 .stream()

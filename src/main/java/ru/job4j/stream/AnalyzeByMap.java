@@ -1,18 +1,16 @@
 package ru.job4j.stream;
 
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  *
  */
-public class Analyze {
+public class AnalyzeByMap {
 
-    public static double averageScore(Stream<Pupil> stream) {
-        return stream
+    public static double averageScore(List<Pupil> list) {
+        return list.stream()
                 .flatMap(pupil -> pupil.getSubjects()
                         .stream())
                         .mapToInt(Subject::getScore)
@@ -20,18 +18,18 @@ public class Analyze {
                         .orElse(0D);
     }
 
-    public static List<Tuple> averageScoreBySubject(Stream<Pupil> stream) {
-        return stream
-                .map(pupil -> new Tuple(pupil.getName(), pupil.getSubjects()
+    public static List<Label> averageScoreByPupil(List<Pupil> list) {
+        return list.stream()
+                .map(pupil -> new Label(pupil.getName(), pupil.getSubjects()
                         .stream()
-                        .mapToInt(Subject::getScore)
+                        .mapToDouble(Subject::getScore)
                         .average()
                         .orElse(0D)))
                 .collect(Collectors.toList());
     }
 
-    public static List<Tuple> averageScoreByPupil(Stream<Pupil> stream) {
-        return stream
+    public static List<Label> averageScoreBySubject(List<Pupil> list) {
+        return list.stream()
                 .flatMap(pupil -> pupil.getSubjects()
                         .stream())
                 .collect(Collectors
@@ -40,22 +38,22 @@ public class Analyze {
                                 Collectors.averagingDouble(Subject::getScore)))
                 .entrySet()
                 .stream()
-                .map(pupil -> new Tuple(pupil.getKey(), pupil.getValue()))
+                .map(pupil -> new Label(pupil.getKey(), pupil.getValue()))
                 .collect(Collectors.toList());
     }
 
-    public static Tuple bestStudent(Stream<Pupil> stream) {
-        return stream
-                .map(pupil -> new Tuple(pupil.getName(), pupil.getSubjects()
+    public static Label bestStudent(List<Pupil> list) {
+        return list.stream()
+                .map(pupil -> new Label(pupil.getName(), pupil.getSubjects()
                         .stream()
                         .mapToInt(Subject::getScore)
                         .sum()))
-                .max(Comparator.comparingDouble(Tuple::getScore))
-                .orElse(new Tuple("", 0D));
+                .max(Label::compareTo)
+                .orElse(new Label("", 0D));
     }
 
-    public static Tuple bestSubject(Stream<Pupil> stream) {
-        return stream
+    public static Label bestSubject(List<Pupil> list) {
+        return list.stream()
                 .flatMap(pupil -> pupil.getSubjects()
                         .stream())
                 .collect(Collectors
@@ -63,8 +61,8 @@ public class Analyze {
                                 Collectors.summingDouble(Subject::getScore)))
                 .entrySet()
                 .stream()
-                .map(pupil -> new Tuple(pupil.getKey(), pupil.getValue()))
-                .max(Comparator.comparingDouble(Tuple::getScore))
-                .orElse(new Tuple("", 0D));
+                .map(pupil -> new Label(pupil.getKey(), pupil.getValue()))
+                .max(Label::compareTo)
+                .orElse(new Label("", 0D));
     }
 }
